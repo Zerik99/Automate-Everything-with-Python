@@ -13,6 +13,7 @@ class WebDriverTemplate():
 
     # A method to add options to the webdriver.
     # This reduces the chance of errors occuring during the automation.
+    # used in the get_driver method.
     def add_options(self):
         self.wdoptions = webdriver.ChromeOptions()
         self.wdoptions.add_argument("disable-infobars")
@@ -26,6 +27,7 @@ class WebDriverTemplate():
         return self.wdoptions
 
     # A method to add a service to the webdriver.
+    #  used in the get_driver method.
     def add_service(self):
         self.service = Service(f"{self.driverPath}")
         return self.service
@@ -33,5 +35,5 @@ class WebDriverTemplate():
     # A method to get and return a webdriver object.
     def get_driver(self):
         self.driver = webdriver.Chrome(service=self.add_service(
-            driverPath=self.driverPath), options=self.wdoptions)
+            driverPath=self.driverPath), options=self.add_options())
         return self.driver
