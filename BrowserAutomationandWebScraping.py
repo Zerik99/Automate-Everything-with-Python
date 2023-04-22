@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 def get_driver():
-    # here we are setting options for the webdriver. This makes automation easier with Selenium.
+    # here we are setting options for the webdriver. This reduces the chance of errors occuring during the automation.
     wdoptions = webdriver.ChromeOptions()
     wdoptions.add_argument("disable-infobars",)
     wdoptions.add_argument("start-maximized")
