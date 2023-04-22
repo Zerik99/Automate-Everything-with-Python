@@ -5,11 +5,11 @@ from selenium.webdriver.chrome.service import Service
 
 
 class WebDriverTemplate():
-    def __init__(self, driver, service, wdoptions, driverPath):
+    def __init__(self, driver, service, wdoptions):
         self.driver = driver
         self.service = service
         self.wdoptions = wdoptions
-        self.driverPath = driverPath
+        self.driverPath = "C:\\Program Files (x86)\\chromedriver.exe"
 
     def add_options(self):
         self.wdoptions = webdriver.ChromeOptions()
