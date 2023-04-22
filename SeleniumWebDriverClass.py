@@ -9,8 +9,10 @@ class WebDriverTemplate():
         self.driver = driver
         self.service = service
         self.wdoptions = wdoptions
-        self.driverPath = "C:\\Program Files (x86)\\chromedriver.exe"
+        self.driverPath = 'C:\\Program Files (x86)\\chromedriver.exe'
 
+    # A method to add options to the webdriver.
+    # This reduces the chance of errors occuring during the automation.
     def add_options(self):
         self.wdoptions = webdriver.ChromeOptions()
         self.wdoptions.add_argument("disable-infobars")
@@ -23,10 +25,12 @@ class WebDriverTemplate():
             "disable-blink-features=AutomationControlled")
         return self.wdoptions
 
+    # A method to add a service to the webdriver.
     def add_service(self):
         self.service = Service(f"{self.driverPath}")
         return self.service
 
+    # A method to get and return a webdriver object.
     def get_driver(self):
         self.driver = webdriver.Chrome(service=self.add_service(
             driverPath=self.driverPath), options=self.wdoptions)
