@@ -6,12 +6,6 @@ import time
 """The point of the section is to understand that using the GUI isn't always the best way to do things.
 Sometimes it's better to use the API's that are available to us."""
 
-"""Browser automation and webscraping are two different things.
-Browser automation is when you use a script to automate a browser by manipulating the user interface.
-Webscraping is when you use a script to scrape data from a website via APIs or the URL."""
-
-"""selenium functions as a hybrid between browser automation and webscraping."""
-
 
 def convert_date_to_epoch():
     """converts date to epoch time"""
