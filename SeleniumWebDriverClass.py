@@ -5,11 +5,12 @@ from selenium.webdriver.chrome.service import Service
 
 
 class WebDriverTemplate():
-    def __init__(self, driver, service, wdoptions):
-        self.driver = driver
-        self.service = service
-        self.wdoptions = wdoptions
-        self.driverPath = 'C:\\Program Files (x86)\\chromedriver.exe'
+    def __init__(self, siteURL):
+        self.driver = ""
+        self.service = ""
+        self.wdoptions = ""
+        self.driverPath = 'C:\Program Files (x86)\chromedriver.exe'
+        self.siteURL = siteURL
 
     # A method to add options to the webdriver.
     # This reduces the chance of errors occuring during the automation.
@@ -34,6 +35,7 @@ class WebDriverTemplate():
 
     # A method to get and return a webdriver object.
     def get_driver(self):
-        self.driver = webdriver.Chrome(service=self.add_service(
-            driverPath=self.driverPath), options=self.add_options())
+        self.driver = webdriver.Chrome(
+            service=self.add_service(), options=self.add_options())
+        self.driver.get(self.siteURL)
         return self.driver
