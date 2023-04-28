@@ -12,9 +12,9 @@ def get_currency(in_currency, out_currency):
 
 
 def main():
-    conversionRate = get_currency('Eur', 'USD')
+    conversionRate = get_currency("Eur", "USD")
     return conversionRate
 
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     print(main())
