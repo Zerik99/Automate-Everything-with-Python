@@ -68,9 +68,18 @@ class FileUtil:
                 zf.write(path)
 
     def unzip_zipfile(self):
-        """Unzips a zipfile"""
+        """Unzips a zipfile: currently not working."""
         destination_path = self.root_dir
         file_paths = self.root_dir.glob("*.zip")
         for path in file_paths:
             with zipfile.ZipFile(path, "r") as zf:
                 zf.extractall(path=destination_path)
+
+    def destroy_files_forever(self):
+        """Deletes all files in the root_dir"""
+        for path in self.file_paths:
+            if not path.is_file():
+                continue
+            with open(path, "wb") as f:
+                f.write(b"")
+            path.unlink()
