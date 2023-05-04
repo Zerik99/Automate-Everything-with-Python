@@ -5,24 +5,22 @@ import pandas
 
 def send_emails(contactsdf: pandas.DataFrame, yagconnection: yagmail.SMTP):
     for index, col in contactsdf.iterrows():
-        invoicefilename = f"{col['name']}_Bill.txt"
+        invoicefilename = f"{str(col['name']).replace(' ', '_')}.txt"
         receiver = col["email"]
         subject = "This is a Test Email"
         contents = [
             f"""Hello {col['name']}, You owe ${col['amountdue']}.""",
-            f"{invoicefilename}",
+            f"Section 5_Automating Emails/files/invoices/{invoicefilename}",
         ]
 
-        create_new_invoice(col["name"], str(contents[0]))
+        create_new_invoice(filename=invoicefilename, filecontent=str(contents[0]))
 
         yagconnection.send(to=receiver, subject=subject, contents=contents)
         print("Email Sent!")
 
 
 def create_new_invoice(filename: str, filecontent: str):
-    with open(
-        f"Section 5_Automating Emails/files/invoices/{filename}_Bill.txt", "w"
-    ) as f:
+    with open(f"Section 5_Automating Emails/files/invoices/{filename}", "w") as f:
         f.write(filecontent)
 
 
