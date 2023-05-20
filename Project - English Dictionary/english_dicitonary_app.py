@@ -14,8 +14,8 @@ from PyQt6.QtWidgets import (
 
 
 # methods
-def define_word() -> None:
-    """Define the word typed in the input field and update the definition label"""
+def get_dictionary() -> None:
+    """gets the dictionary data and calls the get_definition method"""
     in_word: str = word_input.text().lower()
 
     with open(
@@ -76,7 +76,7 @@ word_input.setMinimumWidth(400)
 define_btn.setFixedWidth(100)
 
 # setup signals and slots
-define_btn.clicked.connect(define_word)
+define_btn.clicked.connect(get_dictionary)
 
 # Add widgets to layouts
 input_layout.addWidget(word_input, alignment=Qt.AlignmentFlag.AlignLeft)
