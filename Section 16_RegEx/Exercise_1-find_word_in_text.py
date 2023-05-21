@@ -1,0 +1,21 @@
+"""A simple app to find a word in a text file and return the line."""
+import re
+
+data = [
+    "mr Jim Cloudy, Texas, 01091231, 1 dog 1 cat, jim.cloudy@example.com",
+    "mrs Anna Cloudy, Delhi, 2dogs 1fish bathlover@example.com",  # this line will be found
+    "Mrs. Sarah Prost, Baghdad, +4327629101, 1 hamster, 2 crocodiles",
+    "Ms Beta Palm Ontario 08234211 12 cats, beta@example.com",
+    "mr. Dog Bells texas 09234211 3 honey badgers alta_bells.example.com",
+    "ms. Claudia More, Gujarat, 012311, 3 dogs",
+    "mrs Alma Stills Delhi 01231981 1 dog",  # this line will be found
+    "mr Sen Kumar Delhi 3456 ants",  # this line will be found
+]
+
+pattern = re.compile(
+    r"(.*)(delhi)(.*)", re.IGNORECASE
+)  # find all lines with the word "delhi" in them.
+
+matches = [line for line in data if pattern.findall(line)]
+
+print(matches)
