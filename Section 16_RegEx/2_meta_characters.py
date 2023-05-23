@@ -36,6 +36,6 @@ search_string = """This is a string to search for a regular expression like
     3. here is an email fak1eemail@gmail.com
     4. here is an email fake mail @gmail.com"""
 
-pattern = re.compile("[^ ]+@[^ ]+\.[a-z]+")
+pattern = re.compile(r"[^ ]+@[^ ]+\.[a-z]+")
 matches = pattern.findall(search_string)
 print(matches)
