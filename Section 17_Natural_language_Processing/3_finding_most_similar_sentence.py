@@ -18,25 +18,15 @@ def main() -> None:
     st_tokenized_sentence.append(question)
     print(st_tokenized_sentence)
 
-    # can probably turn this into a separate function
-
-    vectorizer = TfidfVectorizer(tokenizer=get_lemma_sentence)
-
-    tf = vectorizer.fit_transform(st_tokenized_sentence)
-
-    values = cosine_similarity(tf[-1], tf)
-
-    index = values.argsort()[0][-2]
-
-    coeff = values.flatten().argsort()[-2]
-
-    if coeff > 0.3:
-        print(st_tokenized_sentence[index])
+    most_similar_sentence = get_most_similar_sentence(
+        get_lemma_sentence, st_tokenized_sentence
+    )
+    print(most_similar_sentence)
 
 
-def get_lemma_sentence(sentence: str) -> list[str]:
+def get_lemma_sentence(_sentence: str) -> list[str]:
     """Returns the lemmatized version of a sentence."""
-    sentence_tokens: list[str] = nltk.word_tokenize(sentence.lower())
+    sentence_tokens: list[str] = nltk.word_tokenize(_sentence.lower())
 
     pos_tags = nltk.pos_tag(sentence_tokens)
 
@@ -55,10 +45,28 @@ def get_lemma_sentence(sentence: str) -> list[str]:
     return lemma_sentence
 
 
-def get_tokenized_sentence(sentence: str) -> list[str]:
+def get_tokenized_sentence(_sentence: str) -> list[str]:
     """Returns the tokenized version of a sentence."""
-    sentence_tokens: list[str] = nltk.sent_tokenize(sentence.lower())
+    sentence_tokens: list[str] = nltk.sent_tokenize(_sentence.lower())
     return sentence_tokens
+
+
+def get_most_similar_sentence(_tokenizer, _sentence_tokens) -> str:
+    """Returns the similarity coefficient between two sentences."""
+    vectorizer = TfidfVectorizer(tokenizer=_tokenizer)
+
+    tf = vectorizer.fit_transform(_sentence_tokens)
+
+    values = cosine_similarity(tf[-1], tf)
+
+    index = values.argsort()[0][-2]
+
+    coeff = values.flatten().argsort()[-2]
+
+    if coeff > 0.3:
+        return _sentence_tokens[index]
+    else:
+        return "Sorry, I couldn't find any relevant info."
 
 
 if __name__ == "__main__":
